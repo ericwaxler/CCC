@@ -23,27 +23,31 @@ def get_price(currency):
 
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
+    resp = []
 
-    if (i_date.date() == parse(soup.select_one('table td.text-left').text).date()):
-        p_open = soup.select('table td[data-format-value]')[0]['data-format-value']
-        p_high = soup.select('table td[data-format-value]')[1]['data-format-value']
-        p_low = soup.select('table td[data-format-value]')[2]['data-format-value']
-        p_close = soup.select('table td[data-format-value]')[3]['data-format-value']
-        volume = soup.select('table td[data-format-value]')[4]['data-format-value']
-        m_cap = soup.select('table td[data-format-value]')[5]['data-format-value']
-        
-        
-        #resp = {'Currency': currency, 'Date': str_date1, 'Open': p_open, 'High': p_high, 'Low': p_low, 'Close': p_close, 'Volume': volume, 'MarketCap': m_cap}
-        resp = [currency,str_date1,p_open,p_high,p_low,p_close,volume,m_cap]
-        browser.quit()
-        return resp
-    else:
-        browser.quit()
-        return None
+    for x in soup.select('table tr.text-right'):
+        date = x.select_one('table td.text-left').text
+        data = x.select('table td[data-format-value]')
+        p_open = data[0]['data-format-value']
+        p_high = data[1]['data-format-value']
+        p_low = data[2]['data-format-value']
+        p_close = data[3]['data-format-value']
+        volume = data[4]['data-format-value']
+        m_cap = data[5]['data-format-value']
+        d_dict = {'Currency': currency, 'Date': date, 'Open': p_open, 'High': p_high, 'Low': p_low, 'Close': p_close, 'Volume': volume, 'Market Cap': m_cap}
+        print(d_dict)
+        resp.append(d_dict)
+
+    browser.quit()
+    return resp
 
 monitored_currencies = ['bitcoin','litecoin','ripple','stellar','tether','ethereum','eos','bitcoin-cash','binance-coin','cardano']
 
-for x in monitored_currencies:
+for i in monitored_currencies:
     with open('target.csv','a') as cd:
-        csv_writer = csv.writer(cd, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        csv_writer.writerow(get_price(x))
+        fieldnames = ['Currency','Date','Open','High','Low','Close','Volume','Market Cap']
+        csv_writer = csv.DictWriter(cd, delimiter=',', quotechar='"', fieldnames=fieldnames)
+        response = get_price(i)
+        for x in response:
+            print(x)
+            csv_writer.writerow(x)
