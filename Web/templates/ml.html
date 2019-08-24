@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cryptocurrency Comparison</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-default">
+    <a class="navbar-brand" style="background-color: #0ea099; color:white; padding-inline:10%;" height="100%"; href="/#">Crypto</a>
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggle-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-right" id="navbarSupportedContent"></div>
+      <ul class="nav justify-content-end">
+          <li class="nav-item active">
+              <a class="nav-link" href="ml">LSTM <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="analysis">Analysis</a>
+            </li>
+          </ul>
+        </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Long Short-Term Memory</h1>
+        <h3>LSTM is a neural network architecture primarily used to predict time-series data.</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <img src="{{url_for('static', filename='traintest.png') }}" alt="traintest">
+      </div>
+
+    </div>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <h3>Long Short-Term Memory is an artificial neural network architecture that can process sequences of data, in addition to single points.  For this reason, they are particularly useful for analyzing time-series data where 'remembering' sequences of importance is critical.</h3>
+      <h3>Because sequence matters with time-series data, simple randomization is ineffective - the data must be split at a point in time.</h3>
+      <h3>There are two primary variables in this model:</h3>
+      <ul>
+        <li><h4>Train/Test Split</h4></li>
+        <li><h4>The 'look-behind' period</h4></li>
+      </ul>
+      <h3>The look-behind period defines the number of samples, in this case days, used to forecast the next data point. We'll examine several look-behind values using an 80/20 train/test split.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+          <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <h3>Look-Behind: 10 days</h3>
+              </div>
+        <img src="{{url_for('static', filename='b10.png') }}" alt="b10">
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="panel panel-default">
+          <div class="panel-body text-center">
+            <h3>Look-Behind: 30 days</h3>
+          </div>
+        <img src="{{url_for('static', filename='b30.png') }}" alt="b30">
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="panel panel-default">
+          <div class="panel-body text-center">
+            <h3>Look-Behind: 60 days</h3>
+          </div>
+        <img src="{{url_for('static', filename='b60.png') }}" alt="b60">
+      </div>
+  </div>
+
+  <div class="row justify-content-center">
+      <div class="col-md-12">
+        <h3>A 30 day look-behind period appears to produce the most accurate results. Next we'll manipulate the train/test split.</h3>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <h3>Train/Test Split: 50% / 50%</h3>
+            </div>
+          <img src="{{url_for('static', filename='bpoint5.png') }}" alt="b50">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <h3>Train/Test Split: 65% / 35%</h3>
+            </div>
+          <img src="{{url_for('static', filename='bpoint65.png') }}" alt="b65">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <h3>Train/Test Split: 90% / 10%</h3>
+            </div>
+          <img src="{{url_for('static', filename='bpoint9.png') }}" alt="b9">
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h3>Our model suggests that the more data is used for training, the more accurate the prediction will be.</h3>
+        </div>
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+  <script src="{{ url_for('static', filename='js/bonus.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>

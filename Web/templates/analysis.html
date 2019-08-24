@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cryptocurrency Comparison</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-default">
+    <a class="navbar-brand" style="background-color: #0ea099; color:white; padding-inline:10%;" height="100%"; href="/#">Crypto</a>
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggle-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-right" id="navbarSupportedContent"></div>
+      <ul class="nav justify-content-end">
+          <li class="nav-item active">
+              <a class="nav-link" href="ml">LSTM <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="analysis">Analysis</a>
+            </li>
+          </ul>
+        </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Relative Analysis</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body text-center">
+            <h2>Normalized Prices</h2>
+          </div>
+        </div>
+        <img class="img-responsive" src="{{url_for('static', filename='NormPrices.png') }}" alt="my plot">
+      </div>
+      <div class="col-md-5">
+        <div id="gauge"></div>
+      </div>
+    </div>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <h3>The graph above shows the normalized prices of various crypto-currencies over the past two years.  We can see that they follow a similar trend, however lately Bitcoin has deviated from the pack.</h3>
+      <h3>Let's extend the usage of LSTM to use several historic crypto-currency prices to predict price.</h3>
+      <h3>The historic prices of litecoin, ripple, and ethereum will be used to predict ethereum price.
+
+      <h3>Initially, we'll use only ethereum data for predictions.  We'll use a 30 day look-behind and a 70/30 train/test split.</h3>
+    </div>
+  </div>
+
+    <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                  <h3>Ethereum Data Only</h3>
+                </div>
+          <img src="{{url_for('static', filename='ethers.png') }}" alt="es">
+        </div>
+    </div>
+  
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h3>Next, we'll use ethereum, litecoin, and ripple data.  Again, we'll use a 30 day look-behind and a 70/30 train/test split.</h3>
+        </div>
+      </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <h3>Ethereum, Litecoin, and Ripple Data</h3>
+            </div>
+          <img src="{{url_for('static', filename='etherm.png') }}" alt="em">
+        </div>
+    </div>
+  
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h3>In this case, mixing in data from other crypto-currencies made our predictions less accurate.</h3>
+        </div>
+      </div>
+
+  </div>
+
+  <!-- <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+  <script src="{{ url_for('static', filename='js/bonus.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>
