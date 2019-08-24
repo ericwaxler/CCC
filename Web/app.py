@@ -34,12 +34,11 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-#app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://CCCpostgres:dt^nE8%TxP+r3nL!@ccc-db.cyiw1kahfvud.us-east-1.rds.amazonaws.com:5432/prices"
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://ttylkkxdfbvbkj:ebf9e172abcf60ce53ef035d48853d3bd1e6f523f17a3c4cd532241ec79bb755@ec2-50-19-114-27.compute-1.amazonaws.com:5432/d869a7epfs2elq'
+app.config["SQLALCHEMY_DATABASE_URI"] = #your DB uri
 app.config['IMAGES_URL'] = '/plots'
 db = SQLAlchemy(app)
 
-engine = create_engine('postgres://ttylkkxdfbvbkj:ebf9e172abcf60ce53ef035d48853d3bd1e6f523f17a3c4cd532241ec79bb755@ec2-50-19-114-27.compute-1.amazonaws.com:5432/d869a7epfs2elq')
+#engine = create_engine('your DB uri')
 metadata = MetaData()
 metadata.reflect(engine, only=['prices', 'pivot'])
 
